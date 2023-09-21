@@ -7,28 +7,29 @@ person: Person {
 }
 laufAlgorhytmus: LaufAlgorhytmus {
   methoden: Methoden {
-    NachOben
-    NachUnten
-    SeitlichGehen
+    EtageHoch
+    EtageRunter
+    NachNorden
+    NachOsten
+    NachSüden
+    NachWesten
     SchnellstenWegFinden
   }
 }
 schule: Schule {
+  variablen: Variablen {
+    "char[] grundrissErsteEtage"
+    "char[] grundrissZweiteEtage"
+  }
+  klassen: Klassen {
+    Person
+    ErsteEtage
+    ZweiteEtage
+  }
   methoden: Methoden {
     GrundrissAulesen
   }
 }
-ersteEtage: ErsteEtage {
-  variablen: Variablen {
-    "char[] grundrissErsteEtage"
-  }
-}
-zweiteEtage: ZweiteEtage {
-  variablen: Variablen {
-    "char[] grundrissZweiteEtage"
-  }
-}
 
 schule <-> person <-> laufAlgorhytmus
-main <-> schule <-> ersteEtage
-schule <-> ZweiteEtage
+main <-> schule
