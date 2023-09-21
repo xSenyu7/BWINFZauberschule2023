@@ -23,8 +23,6 @@ schule: Schule {
   }
   klassen: Klassen {
     Person
-    ErsteEtage
-    ZweiteEtage
   }
   methoden: Methoden {
     GrundrissAulesen
