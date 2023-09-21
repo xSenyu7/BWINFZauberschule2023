@@ -1,0 +1,34 @@
+main: Main
+person: Person {
+  variablen: Variablen {
+    "char[] PositionImStockwerk"
+    "Etage etage"
+  }
+}
+laufAlgorhytmus: LaufAlgorhytmus {
+  methoden: Methoden {
+    NachOben
+    NachUnten
+    SeitlichGehen
+    SchnellstenWegFinden
+  }
+}
+schule: Schule {
+  methoden: Methoden {
+    GrundrissAulesen
+  }
+}
+ersteEtage: ErsteEtage {
+  variablen: Variablen {
+    "char[] grundrissErsteEtage"
+  }
+}
+zweiteEtage: ZweiteEtage {
+  variablen: Variablen {
+    "char[] grundrissZweiteEtage"
+  }
+}
+
+schule <-> person <-> laufAlgorhytmus
+main <-> schule <-> ersteEtage
+schule <-> ZweiteEtage
