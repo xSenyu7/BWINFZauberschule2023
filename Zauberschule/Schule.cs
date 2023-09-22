@@ -3,13 +3,14 @@ namespace Zauberschule
 {
     public class Schule
     {
-        char[] grundrissErsteEtage;
-        char[] grundrissZweiteEtage;
+        private char[] grundrissErsteEtage;
+        private char[] grundrissZweiteEtage;
 
         Person person = new();
 
         public char[] GrundrissAuslesen()
         {
+            string text = File.ReadAllText(@"..\RonsSchule");
             char[] textDatei = { '1', '1' };
 
             return textDatei;
