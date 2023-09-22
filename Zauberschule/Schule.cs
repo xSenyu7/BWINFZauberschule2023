@@ -11,7 +11,7 @@ namespace Zauberschule
 
         public char[] GrundrissAuslesen(string path)
         {
-            string text = File.ReadAllText(@"..\RonsSchule");
+            string text = File.ReadAllText(@"..\..\..\..\zauberschule0.txt");
             char[] textDatei = text.ToCharArray();
 
             return textDatei;

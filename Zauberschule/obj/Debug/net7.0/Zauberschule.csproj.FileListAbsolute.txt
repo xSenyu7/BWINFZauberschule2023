@@ -2,3 +2,13 @@ C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Deb
 C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.AssemblyInfoInputs.cache
 C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.AssemblyInfo.cs
 C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.csproj.CoreCompileInputs.cache
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\bin\Debug\net7.0\Zauberschule.exe
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\bin\Debug\net7.0\Zauberschule.deps.json
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\bin\Debug\net7.0\Zauberschule.runtimeconfig.json
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\bin\Debug\net7.0\Zauberschule.dll
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\bin\Debug\net7.0\Zauberschule.pdb
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.dll
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\refint\Zauberschule.dll
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.pdb
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.genruntimeconfig.cache
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\ref\Zauberschule.dll
