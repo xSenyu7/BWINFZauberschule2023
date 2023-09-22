@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Data\\Zauberschule.Data.csproj",
-      "projectName": "Zauberschule.Data",
-      "projectPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Data\\Zauberschule.Data.csproj",
+      "projectUniqueName": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectName": "ConsoleApp1",
+      "projectPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\ConsoleApp1\\ConsoleApp1.csproj",
       "packagesPath": "C:\\Users\\fahrenbruch\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Data\\obj\\",
+      "outputPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

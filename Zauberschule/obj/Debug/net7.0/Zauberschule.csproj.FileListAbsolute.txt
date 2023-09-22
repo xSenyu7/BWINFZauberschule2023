@@ -1,0 +1,4 @@
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.AssemblyInfoInputs.cache
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.AssemblyInfo.cs
+C:\Users\fahrenbruch\Desktop\Projekte\BWINFZauberschule2023\Zauberschule\obj\Debug\net7.0\Zauberschule.csproj.CoreCompileInputs.cache

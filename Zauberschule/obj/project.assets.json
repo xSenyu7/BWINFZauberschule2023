@@ -1,46 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {
-      "Zauberschule.Data/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/Zauberschule.Data.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Zauberschule.Data.dll": {}
-        }
-      },
-      "Zauberschule.Logic/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/Zauberschule.Logic.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Zauberschule.Logic.dll": {}
-        }
-      }
-    }
+    "net7.0": {}
   },
-  "libraries": {
-    "Zauberschule.Data/1.0.0": {
-      "type": "project",
-      "path": "../Zauberschule.Data/Zauberschule.Data.csproj",
-      "msbuildProject": "../Zauberschule.Data/Zauberschule.Data.csproj"
-    },
-    "Zauberschule.Logic/1.0.0": {
-      "type": "project",
-      "path": "../Zauberschule.Logic/Zauberschule.Logic.csproj",
-      "msbuildProject": "../Zauberschule.Logic/Zauberschule.Logic.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net7.0": [
-      "Zauberschule.Data >= 1.0.0",
-      "Zauberschule.Logic >= 1.0.0"
-    ]
+    "net7.0": []
   },
   "packageFolders": {
     "C:\\Users\\fahrenbruch\\.nuget\\packages\\": {},
@@ -74,14 +39,7 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {
-            "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Data\\Zauberschule.Data.csproj": {
-              "projectPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Data\\Zauberschule.Data.csproj"
-            },
-            "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Logic\\Zauberschule.Logic.csproj": {
-              "projectPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule.Logic\\Zauberschule.Logic.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

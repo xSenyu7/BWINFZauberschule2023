@@ -4,7 +4,15 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+
+            Schule schule = new();
+
+            char[] arrLine = schule.GrundrissAuslesen("adf");
+
+            foreach (char c in arrLine)
+            {
+                Console.WriteLine(c);
+            }
         }
     }
 }
