@@ -1,16 +1,24 @@
-﻿namespace Zauberschule.Data
+﻿using Zauberschule.Logic;
+
+namespace Zauberschule.Data
 {
     public class Schule
     {
-        public string arrLänge { get; private set; }
-        public string arrBreite { get; private set; }
+        
         private char[,] grundrissErsteEtage;
         private char[,] grundrissZweiteEtage;
+        private string arrLänge;
+        private string arrBreite;
         private char[] grundrissSchule;
+
+
 
         public Schule()
         {
-
+            arrLänge = "";
+            arrBreite = "";
+            grundrissErsteEtage = Converter.CharArrayInitialisieren(int.Parse(arrLänge), int.Parse(arrBreite));
+            grundrissZweiteEtage = Converter.CharArrayInitialisieren(int.Parse(arrLänge), int.Parse(arrBreite));
         }
 
         public char[] GrundrissAuslesen(string path)
@@ -25,6 +33,9 @@
 
         private void LängeUndBreiteDerArraysAuslesen(char[] textDatei)
         {
+            string arrL;
+            string arrb;
+
             for (int i = 0; i < textDatei.Length; i++)
             {
                 if (char.IsNumber(textDatei[i]))
@@ -41,11 +52,19 @@
                         }
                         else
                         {
-                            return;
+                            break;
                         }
                     }
                 }
             }
+
+            arrLänge = arrL;
+            arrBreite = arrb;
+        }
+
+        private void CharInitialisieren()
+        {
+
         }
 
         public void OberesStockwerkErmitteln()

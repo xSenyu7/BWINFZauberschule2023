@@ -17,8 +17,6 @@ namespace Zauberschule
             {
                 Console.WriteLine(c);
             }
-
-            Console.WriteLine(schule.arrLänge + "\n" + schule.arrBreite);
         }
     }
 }
