@@ -6,7 +6,7 @@ namespace Zauberschule.Data
     {
         private string arrLänge;
         private string arrBreite;
-        private char[,] grundrissErsteEtage;
+        private char[,] grundrissErsteEtage = new char[Convert.ToInt32(InitialisiereSchule.arrLänge), Convert.ToInt32(InitialisiereSchule.arrBreite)];
         private char[,] grundrissZweiteEtage;
         private char[] grundrissSchule;
 
