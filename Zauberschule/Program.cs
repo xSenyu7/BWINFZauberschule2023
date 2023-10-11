@@ -11,9 +11,11 @@ namespace Zauberschule
 
             Schule schule = new();
 
-            char[] arrLine = schule.GrundrissAuslesen(pfadZurTxt);
+            char[] zauberschuleArray = schule.GrundrissAuslesen(pfadZurTxt);
 
-            foreach (char c in arrLine)
+
+
+            foreach (char c in zauberschuleArray)
             {
                 Console.WriteLine(c);
             }
