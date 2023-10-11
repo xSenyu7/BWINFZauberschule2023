@@ -3,12 +3,12 @@
 
 namespace Zauberschule.Logic
 {
-    public static class InitialisiereSchule
+    public class InitialisiereSchule
     {
-        public static string arrLänge;
-        public static string arrBreite;
+        public string arrLänge;
+        public string arrBreite;
 
-        public static void LängeUndBreiteDerArraysAuslesen(char[] textDatei)
+        public void LängeUndBreiteDerArraysAuslesen(char[] textDatei)
         {
             for (int i = 0; i < textDatei.Length; i++)
             {
@@ -23,12 +23,14 @@ namespace Zauberschule.Logic
                         if (char.IsNumber(textDatei[j]))
                         {
                             arrBreite = arrBreite + textDatei[j];
+                            i++;
                         }
                         else
                         {
                             break;
                         }
                     }
+                    break;
                 }
             }
         }

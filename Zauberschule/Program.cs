@@ -9,7 +9,7 @@ namespace Zauberschule
 
             string pfadZurTxt = @"..\..\..\..\zauberschule0.txt";
 
-            Schule schule = new();
+            Schule schule = new(pfadZurTxt);
 
             char[] zauberschuleArray = schule.GrundrissAuslesen(pfadZurTxt);
 
@@ -19,6 +19,9 @@ namespace Zauberschule
             {
                 Console.WriteLine(c);
             }
+
+            Console.WriteLine(schule.initialisiere.arrLänge + " " + schule.initialisiere.arrBreite);
+            Console.WriteLine(schule.grundrissZweiteEtage.Length);
         }
     }
 }

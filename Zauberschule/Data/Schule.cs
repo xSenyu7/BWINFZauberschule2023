@@ -4,20 +4,19 @@ namespace Zauberschule.Data
 {
     public class Schule
     {
-        private string arrLänge;
-        private string arrBreite;
-        private char[,] grundrissErsteEtage = new char[Convert.ToInt32(InitialisiereSchule.arrLänge), Convert.ToInt32(InitialisiereSchule.arrBreite)];
-        private char[,] grundrissZweiteEtage;
+
+        public char[,] grundrissErsteEtage;
+        public char[,] grundrissZweiteEtage;
         private char[] grundrissSchule;
+        public InitialisiereSchule initialisiere = new();
 
 
-
-        public Schule()
+        public Schule(string path)
         {
-            arrLänge = "";
-            arrBreite = "";
-            grundrissErsteEtage = Converter.CharArrayInitialisieren(int.Parse(arrLänge), int.Parse(arrBreite));
-            grundrissZweiteEtage = Converter.CharArrayInitialisieren(int.Parse(arrLänge), int.Parse(arrBreite));
+            
+            GrundrissAuslesen(path);
+            grundrissErsteEtage = new char[Convert.ToInt32(initialisiere.arrLänge), Convert.ToInt32(initialisiere.arrBreite)];
+            grundrissZweiteEtage = new char[Convert.ToInt32(initialisiere.arrLänge), Convert.ToInt32(initialisiere.arrBreite)];
         }
 
         public char[] GrundrissAuslesen(string path)
@@ -25,7 +24,7 @@ namespace Zauberschule.Data
             string text = File.ReadAllText(path);
             char[] textDatei = text.ToCharArray();
 
-            InitialisiereSchule.LängeUndBreiteDerArraysAuslesen(textDatei);
+            initialisiere.LängeUndBreiteDerArraysAuslesen(textDatei);
 
             return textDatei;
         }
