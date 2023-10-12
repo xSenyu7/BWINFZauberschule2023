@@ -11,17 +11,9 @@ namespace Zauberschule
 
             Schule schule = new(pfadZurTxt);
 
-            char[] zauberschuleArray = schule.GrundrissAuslesen(pfadZurTxt);
 
 
-
-            foreach (char c in zauberschuleArray)
-            {
-                Console.WriteLine(c);
-            }
-
-            Console.WriteLine(schule.initialisiere.arrLänge + " " + schule.initialisiere.arrBreite);
-            Console.WriteLine(schule.grundrissZweiteEtage.Length);
+            Console.WriteLine(schule.ErsteEtage);
         }
     }
 }

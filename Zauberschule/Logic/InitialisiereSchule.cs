@@ -7,6 +7,8 @@ namespace Zauberschule.Logic
     {
         public string arrLänge;
         public string arrBreite;
+        public char[,] oberesStockwerk;
+        public char[,] unteresStockwerk;
 
         public void LängeUndBreiteDerArraysAuslesen(char[] textDatei)
         {
@@ -31,6 +33,28 @@ namespace Zauberschule.Logic
                         }
                     }
                     break;
+                }
+            }
+        }
+
+        public void OberesStockwerk(char[] textString)
+        {
+            foreach(char c in textString)
+            {
+                if (!!char.IsWhiteSpace(c) || !!char.IsNumber(c) || c != '\n')
+                {
+                    for(int i = 0; i < arrLänge.Length; i++)
+                    {
+                        for(int j = i + 1;j < textString.Length; j++)
+                        {
+                            //if (char.IsAscii(c))
+                            //oberesStockwerk[i,j] = c;
+                        }
+                    }
+                }
+                else if (c == '\n')
+                {
+                    Console.WriteLine("Wir haben einen zeilenumbruch");
                 }
             }
         }
