@@ -11,9 +11,14 @@ namespace Zauberschule
 
             Schule schule = new(pfadZurTxt);
 
-
-
-            Console.WriteLine(schule.ErsteEtage);
+             
+            for(int i = 0; i < schule.ErsteEtage.Länge; i++)
+            {
+                for(int j = 0; j < schule.ErsteEtage.Breite; j++)
+                {
+                    Console.WriteLine(schule.ErsteEtage.Grundriss[i,j]);
+                }
+            }
         }
     }
 }

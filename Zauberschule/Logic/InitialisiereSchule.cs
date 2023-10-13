@@ -1,4 +1,4 @@
-﻿
+﻿using Zauberschule.Data;
 
 
 namespace Zauberschule.Logic
@@ -7,56 +7,69 @@ namespace Zauberschule.Logic
     {
         public string arrLänge;
         public string arrBreite;
-        public char[,] oberesStockwerk;
-        public char[,] unteresStockwerk;
+        private int aktuelleLinie = 0;
+        char[] linie;
 
-        public void LängeUndBreiteDerArraysAuslesen(char[] textDatei)
+        public InitialisiereSchule(string[] linien)
         {
-            for (int i = 0; i < textDatei.Length; i++)
+            linie = linien[aktuelleLinie].ToCharArray();
+
+            LängeUndBreiteErmittlen(linien, linie);
+        }
+
+        private void LängeUndBreiteErmittlen(string[] linien, char[] linie)
+        {
+            for (int i = 0; i < linien[aktuelleLinie].Length; i++)
             {
-                if (char.IsNumber(textDatei[i]))
+                if (char.IsNumber(linie[i]))
                 {
-                    arrLänge = arrLänge + textDatei[i];
+                    arrLänge = arrLänge + linie[i];
                 }
-                else if (char.IsWhiteSpace(textDatei[i]))
+                else if (char.IsWhiteSpace(linie[i]))
                 {
-                    for (int j = i + 1; j < textDatei.Length; j++)
+                    for (int j = i + 1; j < linie.Length; j++)
                     {
-                        if (char.IsNumber(textDatei[j]))
+                        if (char.IsNumber(linie[j]))
                         {
-                            arrBreite = arrBreite + textDatei[j];
-                            i++;
+                            arrBreite = arrBreite + linie[j];
                         }
                         else
                         {
                             break;
                         }
+                        i++;
                     }
-                    break;
                 }
             }
+            aktuelleLinie++;
         }
 
-        public void OberesStockwerk(char[] textString)
+        public Stockwerk OberesStockwerkAuslesen(Stockwerk stockwerk, string[] linien)
         {
-            foreach(char c in textString)
+            linie = linien[aktuelleLinie].ToCharArray();
+
+            if (linie.Length != 0)
             {
-                if (!!char.IsWhiteSpace(c) || !!char.IsNumber(c) || c != '\n')
+                for (int i = 0;i < linie.Length; i++)
                 {
-                    for(int i = 0; i < arrLänge.Length; i++)
-                    {
-                        for(int j = i + 1;j < textString.Length; j++)
-                        {
-                            //if (char.IsAscii(c))
-                            //oberesStockwerk[i,j] = c;
-                        }
-                    }
-                }
-                else if (c == '\n')
-                {
-                    Console.WriteLine("Wir haben einen zeilenumbruch");
+                    stockwerk.Grundriss[aktuelleLinie,i] = linie[i];
                 }
             }
+            return stockwerk;
+        }
+
+        public Stockwerk UnteresStockwerkAuslesen(Stockwerk stockwerk, string[] linien)
+        {
+            linie = linien[aktuelleLinie].ToCharArray();
+
+            if (linie.Length != 0)
+            {
+                for (int i = 0; i < linie.Length; i++)
+                {
+                    stockwerk.Grundriss[aktuelleLinie, i] = linie[i];
+                }
+            }
+            return stockwerk;
         }
     }
 }
