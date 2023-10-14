@@ -44,7 +44,7 @@ namespace Zauberschule.Logic
             aktuelleLinie++;
         }
 
-        public Stockwerk OberesStockwerkAuslesen(Stockwerk stockwerk, string[] linien)
+        public char[,] OberesStockwerkAuslesen(char[,] grundriss, string[] linien)
         {
             linie = linien[aktuelleLinie].ToCharArray();
 
@@ -52,24 +52,27 @@ namespace Zauberschule.Logic
             {
                 for (int i = 0;i < linie.Length; i++)
                 {
-                    stockwerk.Grundriss[aktuelleLinie,i] = linie[i];
+                    grundriss[aktuelleLinie, i] = linie[i];
                 }
+                aktuelleLinie++;
             }
-            return stockwerk;
+            return grundriss;
         }
 
-        public Stockwerk UnteresStockwerkAuslesen(Stockwerk stockwerk, string[] linien)
+        public char[,] UnteresStockwerkAuslesen(Stockwerk stockwerk, string[] linien)
         {
+            char[,] grundriss = new char[stockwerk.Länge, stockwerk.Breite];
             linie = linien[aktuelleLinie].ToCharArray();
 
             if (linie.Length != 0)
             {
                 for (int i = 0; i < linie.Length; i++)
                 {
-                    stockwerk.Grundriss[aktuelleLinie, i] = linie[i];
+                    grundriss[aktuelleLinie, i] = linie[i];
                 }
+                aktuelleLinie++;
             }
-            return stockwerk;
+            return grundriss;
         }
     }
 }
