@@ -1,4 +1,5 @@
 ﻿using Zauberschule.Data;
+using Zauberschule.Logic;
 
 namespace Zauberschule
 {
