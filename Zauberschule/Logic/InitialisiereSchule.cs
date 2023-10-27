@@ -47,30 +47,50 @@ namespace Zauberschule.Logic
         public char[,] OberesStockwerkAuslesen(char[,] grundriss, string[] linien)
         {
             linie = linien[aktuelleLinie].ToCharArray();
+            int längeNum = Convert.ToInt32(arrLänge);
+            int breiteNum = Convert.ToInt32(arrBreite);
 
-            if (linie.Length != 0)
+            while (linie.Length != 0)
             {
-                for (int i = 0;i < linie.Length; i++)
+                for (int i = 0; i < längeNum; i++)
                 {
-                    grundriss[aktuelleLinie, i] = linie[i];
+                    for (int j = 0; j < breiteNum; j++)
+                    {
+                        grundriss[i, j] = linie[j];
+                        Console.Write(grundriss[i,j]);
+                    }
+                    aktuelleLinie++;
+                    linie = linien[aktuelleLinie].ToCharArray();
+
+                    Console.WriteLine();
                 }
-                aktuelleLinie++;
             }
+            aktuelleLinie++;
             return grundriss;
         }
 
-        public char[,] UnteresStockwerkAuslesen(Stockwerk stockwerk, string[] linien)
+        public char[,] UnteresStockwerkAuslesen(char[,] grundriss, string[] linien)
         {
-            char[,] grundriss = new char[stockwerk.Länge, stockwerk.Breite];
             linie = linien[aktuelleLinie].ToCharArray();
+            int längeNum = Convert.ToInt32(arrLänge);
+            int breiteNum = Convert.ToInt32(arrBreite);
 
             if (linie.Length != 0)
             {
-                for (int i = 0; i < linie.Length; i++)
+                for (int i = 0; i < längeNum; i++)
                 {
-                    grundriss[aktuelleLinie, i] = linie[i];
-                }
-                aktuelleLinie++;
+                    for (int j = 0; j < breiteNum; j++)
+                    {
+                        grundriss[i, j] = linie[j];
+                        Console.Write(grundriss[i, j]);
+                    }
+                    if (aktuelleLinie < linien.Length - 1)
+                        aktuelleLinie++;
+
+                    linie = linien[aktuelleLinie].ToCharArray();
+
+                    Console.WriteLine();
+                    }    
             }
             return grundriss;
         }

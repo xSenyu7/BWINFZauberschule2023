@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Zauberschule",
+    "\\Zauberschule\\Data",
+    "\\Zauberschule\\Logic"
   ],
-  "SelectedNode": "\\BWINFWettbewerb.sln",
+  "SelectedNode": "\\Zauberschule\\Zauberschule.csproj",
   "PreviewInSolutionExplorer": false
 }
