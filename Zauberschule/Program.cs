@@ -11,6 +11,8 @@ namespace Zauberschule
 
             Schule schule = new(pfadZurTxt);
 
+            Person person = new(schule);
+
         }
     }
 }

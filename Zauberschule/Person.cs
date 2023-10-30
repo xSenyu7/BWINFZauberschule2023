@@ -7,5 +7,8 @@ namespace Zauberschule
     {
         char[] PositionImStockwerk;
 
+        public Person(Schule schule)
+        {
+        }
     }
 }
