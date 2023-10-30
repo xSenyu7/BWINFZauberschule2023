@@ -7,7 +7,5 @@ namespace Zauberschule
     {
         char[] PositionImStockwerk;
 
-        Etage etage1 = Etage.Etage1;
-        Etage etage2 = Etage.Etage2;
     }
 }
