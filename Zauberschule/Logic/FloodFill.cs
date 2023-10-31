@@ -6,7 +6,6 @@ namespace Zauberschule.Logic
 {
     public class FloodFill
     {
-
         List<Ziel> Zwischenpunkte = new List<Ziel>();
 
         public void AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
@@ -17,7 +16,13 @@ namespace Zauberschule.Logic
 
             while (NotwendigkeitFürAuffüllungPrüfen(ersteEtage) == true)
             {
-                Console.WriteLine("Hat geklappt soweit.");
+                foreach (Ziel z in Zwischenpunkte)
+                {
+                    if (ersteEtage[z.PositionX + 1, z.PositionY] == ".")
+                    {
+
+                    }
+                }
             }
         }
 
@@ -27,13 +32,18 @@ namespace Zauberschule.Logic
         {
             foreach (Ziel z in Zwischenpunkte)
             {
-                if(etage[z.PositionX + 1, z.PositionY] == "."
+                if (etage[z.PositionX + 1, z.PositionY] == "."
                 || etage[z.PositionX - 1, z.PositionY] == "."
                 || etage[z.PositionX, z.PositionY + 1] == "."
                 || etage[z.PositionX, z.PositionY - 1] == ".")
                     return true;
             }
             return false;
+        }
+
+        private void ZwischenpunktIteration()
+        {
+
         }
     }
 }
