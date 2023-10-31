@@ -8,6 +8,8 @@ namespace Zauberschule.Logic
     {
         List<Ziel> Zwischenpunkte = new List<Ziel>();
 
+
+
         public void AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
         {
             Zwischenpunkte.Add(zielpunkt);
@@ -16,16 +18,25 @@ namespace Zauberschule.Logic
 
             while (NotwendigkeitFürAuffüllungPrüfen(ersteEtage) == true)
             {
-                foreach (Ziel z in Zwischenpunkte)
-                {
-                    if (ersteEtage[z.PositionX + 1, z.PositionY] == ".")
-                    {
-
-                    }
-                }
+                PrüfenObAmZiel(ersteEtage);
             }
         }
 
+        private bool PrüfenObAmZiel(string[,] ersteEtage)
+        {
+            foreach (Ziel z in Zwischenpunkte)
+            {
+                if (ersteEtage[z.PositionX + 1, z.PositionY] == "A")
+                    return true;
+                else if (ersteEtage[z.PositionX - 1, z.PositionY] == "A")
+                    return true;
+                else if (ersteEtage[z.PositionX, z.PositionY + 1] == "A")
+                    return true;
+                else if (ersteEtage[z.PositionX, z.PositionY + 1] == "A")
+                    return true;
+            }
+            return false;
+        }
 
 
         private bool NotwendigkeitFürAuffüllungPrüfen(string[,] etage)
