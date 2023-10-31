@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj": {}
+    "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\CloneBranch\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj": {
+    "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\CloneBranch\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj",
+        "projectUniqueName": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\CloneBranch\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj",
         "projectName": "Zauberschule",
-        "projectPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj",
+        "projectPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\CloneBranch\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj",
         "packagesPath": "C:\\Users\\fahrenbruch\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule\\obj\\",
+        "outputPath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\CloneBranch\\BWINFZauberschule2023\\Zauberschule\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

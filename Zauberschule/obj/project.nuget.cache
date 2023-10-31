@@ -1,8 +1,12 @@
 {
   "version": 2,
+<<<<<<< Updated upstream
   "dgSpecHash": "z5SKXPt7E+QGF5VA385G2xSWptaPzOca81vqtON9btW0vAnCRaVVNu8w/VZQqrT1jNl/8CHmD/VhYoNVFW8wvA==",
+=======
+  "dgSpecHash": "U7oARfzeTTI/l5JyUWUm3sgvBCc9hShQS9EEhwWV4qZp+S+Zy6409AxCSRtzYf62CrfltypPX1YO8rQYFUkNGw==",
+>>>>>>> Stashed changes
   "success": true,
-  "projectFilePath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj",
+  "projectFilePath": "C:\\Users\\fahrenbruch\\Desktop\\Projekte\\CloneBranch\\BWINFZauberschule2023\\Zauberschule\\Zauberschule.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
