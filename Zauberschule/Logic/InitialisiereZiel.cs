@@ -1,10 +1,10 @@
-﻿using Zauberschule.Data;
+﻿
+using Zauberschule.Data;
 
 namespace Zauberschule.Logic
 {
-    public class InitialisierePerson
+    public class InitialisiereZiel
     {
-
         public int PositionXFinden(Schule schule)
         {
             Stockwerk etage = ErsteOderZweiteEtage(schule);
@@ -13,7 +13,7 @@ namespace Zauberschule.Logic
             {
                 for (int j = 0; j < etage.Breite - 1; j++)
                 {
-                    if (etage.Grundriss[i,j] == "A")
+                    if (etage.Grundriss[i, j] == "B")
                         return i;
                 }
             }
@@ -29,7 +29,7 @@ namespace Zauberschule.Logic
             {
                 for (int j = 0; j < etage.Breite; j++)
                 {
-                    if (etage.Grundriss[i, j] == "A")
+                    if (etage.Grundriss[i, j] == "B")
                         return j;
                 }
             }
@@ -43,12 +43,12 @@ namespace Zauberschule.Logic
 
             foreach (string s in ersteEtage.Grundriss)
             {
-                if (s == "A")
+                if (s == "B")
                     return ersteEtage;
             }
             foreach (string s in zweiteEtage.Grundriss)
             {
-                if (s == "A")
+                if (s == "B")
                     return zweiteEtage;
             }
 
@@ -56,5 +56,6 @@ namespace Zauberschule.Logic
 
             return empty;
         }
+
     }
 }

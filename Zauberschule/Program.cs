@@ -13,6 +13,8 @@ namespace Zauberschule
 
             Person person = new(schule);
 
+            Ziel ziel = new(schule);
+
         }
     }
 }
