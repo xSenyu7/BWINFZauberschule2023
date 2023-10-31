@@ -7,21 +7,23 @@ namespace Zauberschule.Logic
     public class FloodFill
     {
 
-        List<Ziel> Zwischenpunkte;
+        List<Ziel> Zwischenpunkte = new List<Ziel>();
 
         public void AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
         {
+            Zwischenpunkte.Add(zielpunkt);
+
             string[,] ersteEtage = schule.ErsteEtage.Grundriss;
 
             while (NotwendigkeitFürAuffüllungPrüfen(ersteEtage) == true)
             {
-
+                Console.WriteLine("Hat geklappt soweit.");
             }
         }
 
 
 
-        public bool NotwendigkeitFürAuffüllungPrüfen(string[,] etage)
+        private bool NotwendigkeitFürAuffüllungPrüfen(string[,] etage)
         {
             foreach (Ziel z in Zwischenpunkte)
             {

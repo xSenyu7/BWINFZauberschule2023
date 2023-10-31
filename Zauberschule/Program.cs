@@ -1,4 +1,5 @@
 ﻿using Zauberschule.Data;
+using Zauberschule.Logic;
 
 namespace Zauberschule
 {
@@ -15,6 +16,9 @@ namespace Zauberschule
 
             Ziel ziel = new(schule);
 
+            FloodFill floodFill = new();
+
+            floodFill.AuffüllenDesStockwerks(schule, ziel);
         }
     }
 }
