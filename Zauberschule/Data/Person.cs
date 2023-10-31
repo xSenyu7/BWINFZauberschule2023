@@ -5,17 +5,17 @@ namespace Zauberschule.Data
 {
     public class Person
     {
-        public string PositionSymbol { get; set; } = "A";
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
-        public InitialisierePerson initialisierePerson;
-
+        public InitialisierePerson initialisierePerson = new();
 
         public Person(Schule schule)
         {
             PositionX = initialisierePerson.PositionXFinden(schule);
+            Console.WriteLine(PositionX);
             PositionY = initialisierePerson.PositionYFinden(schule);
+            Console.WriteLine(PositionY);
         }
     }
 }
