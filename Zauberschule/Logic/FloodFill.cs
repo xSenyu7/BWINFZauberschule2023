@@ -18,7 +18,10 @@ namespace Zauberschule.Logic
 
             while (NotwendigkeitFürAuffüllungPrüfen(ersteEtage) == true)
             {
-                PrüfenObAmZiel(ersteEtage);
+                if (PrüfenObAmZiel(ersteEtage) == true)
+                    break;
+
+
             }
         }
 
