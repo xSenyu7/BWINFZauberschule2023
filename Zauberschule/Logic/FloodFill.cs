@@ -9,7 +9,7 @@ namespace Zauberschule.Logic
         int floodNummer = 1;
 
 
-        public void AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
+        public string[,] AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
         {
             Zwischenpunkte.Add(zielpunkt);
 
@@ -21,37 +21,79 @@ namespace Zauberschule.Logic
                     break;
                 else
                     FelderAuffüllen(ersteEtage);
+
+                NeueKoordinatenHinzufügen(ersteEtage);
+
+                SinnloseKoordinatenLöschen(ersteEtage);
+
+                floodNummer++;
+            }
+            return ersteEtage;
+        }
+
+        private void NeueKoordinatenHinzufügen(string[,] etage)
+        
+        {
+            int anzahlZwischenpunkte = Zwischenpunkte.Count;
+
+            for (int i = 0; i < anzahlZwischenpunkte; i++)
+            {
+                if (etage[Zwischenpunkte[i].PositionX + 1, Zwischenpunkte[i].PositionY] == floodNummer.ToString())
+                {
+                    Zwischenpunkte.Add(new Ziel(Zwischenpunkte[i].PositionX + 1, Zwischenpunkte[i].PositionY));
+                }
+                if (etage[Zwischenpunkte[i].PositionX - 1, Zwischenpunkte[i].PositionY] == floodNummer.ToString())
+                {
+                    Zwischenpunkte.Add(new Ziel(Zwischenpunkte[i].PositionX - 1, Zwischenpunkte[i].PositionY));
+                }
+                if (etage[Zwischenpunkte[i].PositionX, Zwischenpunkte[i].PositionY + 1] == floodNummer.ToString())
+                {
+                    Zwischenpunkte.Add(new Ziel(Zwischenpunkte[i].PositionX, Zwischenpunkte[i].PositionY + 1));
+                }
+                if (etage[Zwischenpunkte[i].PositionX, Zwischenpunkte[i].PositionY - 1] == floodNummer.ToString())
+                {
+                    Zwischenpunkte.Add(new Ziel(Zwischenpunkte[i].PositionX, Zwischenpunkte[i].PositionY - 1));
+                }
+            }
+        }
+
+        private void SinnloseKoordinatenLöschen(string[,] etage)
+        {
+            int anzahlZwischenpunkte = Zwischenpunkte.Count;
+
+            for (int i = 0; i < anzahlZwischenpunkte; i++)
+            {
+                if (etage[Zwischenpunkte[i].PositionX + 1, Zwischenpunkte[i].PositionY] != "."
+                || etage[Zwischenpunkte[i].PositionX - 1, Zwischenpunkte[i].PositionY] != "."
+                || etage[Zwischenpunkte[i].PositionX, Zwischenpunkte[i].PositionY + 1] != "."
+                || etage[Zwischenpunkte[i].PositionX, Zwischenpunkte[i].PositionY - 1] != ".")
+                {
+                    Zwischenpunkte.Remove(Zwischenpunkte[i]);
+                    anzahlZwischenpunkte--;
+                }
+
             }
         }
 
         private void FelderAuffüllen(string[,] etage)
         {
-            int aufgefüllteFelder = 0;
-
             foreach (Ziel z in Zwischenpunkte)
             {
-                while (NotwendigkeitFürAuffüllungPrüfen(etage))
+                if (etage[z.PositionX + 1, z.PositionY] == ".")
                 {
-                    if (etage[z.PositionX + 1, z.PositionY] == ".")
-                    {
-                        etage[z.PositionX + 1, z.PositionY] = floodNummer.ToString();
-                        aufgefüllteFelder++;
-                    }
-                    if (etage[z.PositionX - 1, z.PositionY] == ".")
-                    {
-                        etage[z.PositionX - 1, z.PositionY] = floodNummer.ToString();
-                        aufgefüllteFelder++;
-                    }
-                    if (etage[z.PositionX, z.PositionY + 1] == ".")
-                    {
-                        etage[z.PositionX, z.PositionY + 1] = floodNummer.ToString();
-                        aufgefüllteFelder++;
-                    }
-                    if (etage[z.PositionX, z.PositionY - 1] == ".")
-                    {
-                        etage[z.PositionX, z.PositionY - 1] = floodNummer.ToString();
-                        aufgefüllteFelder++;
-                    }
+                    etage[z.PositionX + 1, z.PositionY] = floodNummer.ToString();
+                }
+                if (etage[z.PositionX - 1, z.PositionY] == ".")
+                {
+                    etage[z.PositionX - 1, z.PositionY] = floodNummer.ToString();
+                }
+                if (etage[z.PositionX, z.PositionY + 1] == ".")
+                {
+                    etage[z.PositionX, z.PositionY + 1] = floodNummer.ToString();
+                }
+                if (etage[z.PositionX, z.PositionY - 1] == ".")
+                {
+                    etage[z.PositionX, z.PositionY - 1] = floodNummer.ToString();
                 }
             }
         }

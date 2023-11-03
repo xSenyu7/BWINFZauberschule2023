@@ -18,7 +18,16 @@ namespace Zauberschule
 
             FloodFill floodFill = new();
 
-            floodFill.AuffüllenDesStockwerks(schule, ziel);
+            string[,] wurdeGefillt = floodFill.AuffüllenDesStockwerks(schule, ziel);
+
+            for (int i = 0; i < schule.ErsteEtage.Länge; i++)
+            {
+                for (int j = 0; j < schule.ErsteEtage.Breite; j++)
+                {
+                    Console.Write(wurdeGefillt[i,j]);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
