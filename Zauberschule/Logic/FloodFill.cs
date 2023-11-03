@@ -1,6 +1,4 @@
-﻿
-
-using Zauberschule.Data;
+﻿using Zauberschule.Data;
 
 namespace Zauberschule.Logic
 {
@@ -8,6 +6,7 @@ namespace Zauberschule.Logic
     {
         List<Ziel> Zwischenpunkte = new List<Ziel>();
 
+        int floodNummer = 1;
 
 
         public void AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
@@ -20,22 +19,54 @@ namespace Zauberschule.Logic
             {
                 if (PrüfenObAmZiel(ersteEtage) == true)
                     break;
-
-
+                else
+                    FelderAuffüllen(ersteEtage);
             }
         }
 
-        private bool PrüfenObAmZiel(string[,] ersteEtage)
+        private void FelderAuffüllen(string[,] etage)
+        {
+            int aufgefüllteFelder = 0;
+
+            foreach (Ziel z in Zwischenpunkte)
+            {
+                while (NotwendigkeitFürAuffüllungPrüfen(etage))
+                {
+                    if (etage[z.PositionX + 1, z.PositionY] == ".")
+                    {
+                        etage[z.PositionX + 1, z.PositionY] = floodNummer.ToString();
+                        aufgefüllteFelder++;
+                    }
+                    if (etage[z.PositionX - 1, z.PositionY] == ".")
+                    {
+                        etage[z.PositionX - 1, z.PositionY] = floodNummer.ToString();
+                        aufgefüllteFelder++;
+                    }
+                    if (etage[z.PositionX, z.PositionY + 1] == ".")
+                    {
+                        etage[z.PositionX, z.PositionY + 1] = floodNummer.ToString();
+                        aufgefüllteFelder++;
+                    }
+                    if (etage[z.PositionX, z.PositionY - 1] == ".")
+                    {
+                        etage[z.PositionX, z.PositionY - 1] = floodNummer.ToString();
+                        aufgefüllteFelder++;
+                    }
+                }
+            }
+        }
+
+        private bool PrüfenObAmZiel(string[,] etage)
         {
             foreach (Ziel z in Zwischenpunkte)
             {
-                if (ersteEtage[z.PositionX + 1, z.PositionY] == "A")
+                if (etage[z.PositionX + 1, z.PositionY] == "A")
                     return true;
-                else if (ersteEtage[z.PositionX - 1, z.PositionY] == "A")
+                else if (etage[z.PositionX - 1, z.PositionY] == "A")
                     return true;
-                else if (ersteEtage[z.PositionX, z.PositionY + 1] == "A")
+                else if (etage[z.PositionX, z.PositionY + 1] == "A")
                     return true;
-                else if (ersteEtage[z.PositionX, z.PositionY + 1] == "A")
+                else if (etage[z.PositionX, z.PositionY + 1] == "A")
                     return true;
             }
             return false;
@@ -53,11 +84,6 @@ namespace Zauberschule.Logic
                     return true;
             }
             return false;
-        }
-
-        private void ZwischenpunktIteration()
-        {
-
         }
     }
 }
