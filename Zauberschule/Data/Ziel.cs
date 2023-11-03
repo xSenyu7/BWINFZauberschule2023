@@ -9,14 +9,22 @@ namespace Zauberschule.Data
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
-        public InitialisiereZiel initialisiereZiel = new();
+        public InitialisiereZiel initialisiereZiel;
 
         public Ziel(Schule schule)
         {
+            initialisiereZiel = new();
+
             PositionX = initialisiereZiel.PositionXFinden(schule);
             Console.WriteLine(PositionX);
             PositionY = initialisiereZiel.PositionYFinden(schule);
             Console.WriteLine(PositionY);
+        }
+
+        public Ziel(int positionX, int positionY)
+        {
+            PositionX = positionX;
+            PositionY = positionY;
         }
 
     }
