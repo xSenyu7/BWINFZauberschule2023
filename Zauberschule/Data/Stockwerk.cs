@@ -5,6 +5,6 @@ namespace Zauberschule.Data
     {
         public int Breite { get; set; }
         public int Länge { get; set; }
-        public char[,] Grundriss { get; set; }
+        public string[,]? Grundriss { get; set; }
     }
 }

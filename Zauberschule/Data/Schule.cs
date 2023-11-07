@@ -5,12 +5,13 @@ namespace Zauberschule.Data
     public class Schule
     {
         public string[] linien;
-        public char[,] grundrissInitErste;
-        public char[,] grundrissInitZweite;
+        public string[,] grundrissInitErste;
+        public string[,] grundrissInitZweite;
         public InitialisiereSchule initialisiere;
 
         public Stockwerk ErsteEtage { get; set; }
         public Stockwerk ZweiteEtage { get; set; }
+        //public Person Person { get; set; }
 
 
         public Schule(string path)
@@ -19,8 +20,8 @@ namespace Zauberschule.Data
 
             initialisiere = new InitialisiereSchule(linien);
 
-            grundrissInitErste = new char[Convert.ToInt32(initialisiere.arrLänge), Convert.ToInt32(initialisiere.arrBreite)];
-            grundrissInitZweite = new char[Convert.ToInt32(initialisiere.arrLänge), Convert.ToInt32(initialisiere.arrBreite)];
+            grundrissInitErste = new string[Convert.ToInt32(initialisiere.arrLänge), Convert.ToInt32(initialisiere.arrBreite)];
+            grundrissInitZweite = new string[Convert.ToInt32(initialisiere.arrLänge), Convert.ToInt32(initialisiere.arrBreite)];
 
             ErsteEtage = new Stockwerk
             {

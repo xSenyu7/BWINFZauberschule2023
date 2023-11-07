@@ -3,6 +3,17 @@ namespace Zauberschule.Logic
 {
     public class LaufAlgorhytmus
     {
+
+        public string[,] ErsteEtage {  get; set; }
+        public string[,] ZweiteEtage{  get; set; }
+
+        public LaufAlgorhytmus(string[,] ersteEtage, string[,] zweiteEtage)
+        {
+            ErsteEtage = ersteEtage;
+            ZweiteEtage = zweiteEtage;
+        }
+
+
         public void SchnellstenWegFinden()
         {
 
