@@ -1,4 +1,6 @@
 ﻿
+using Zauberschule.Data;
+
 namespace Zauberschule.Logic
 {
     public class LaufAlgorhytmus
@@ -6,11 +8,15 @@ namespace Zauberschule.Logic
 
         public string[,] ErsteEtage {  get; set; }
         public string[,] ZweiteEtage{  get; set; }
+        public Ziel Ziel { get; set; }
+        public Person Person { get; set; }
 
-        public LaufAlgorhytmus(string[,] ersteEtage, string[,] zweiteEtage)
+        public LaufAlgorhytmus(string[,] ersteEtage, string[,] zweiteEtage, Ziel ziel, Person person)
         {
             ErsteEtage = ersteEtage;
             ZweiteEtage = zweiteEtage;
+            Ziel = ziel;
+            Person = person;
         }
 
 

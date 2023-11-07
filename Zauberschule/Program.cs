@@ -20,7 +20,7 @@ namespace Zauberschule
 
             schule = floodFill.AuffüllenDerStockwerke(schule, ziel, person);
 
-            LaufAlgorhytmus lauf = new(schule.ErsteEtage.Grundriss, schule.ZweiteEtage.Grundriss);
+            LaufAlgorhytmus lauf = new(schule.ErsteEtage.Grundriss, schule.ZweiteEtage.Grundriss, ziel, person);
 
 
             for (int i = 0; i < schule.ErsteEtage.Länge; i++)
