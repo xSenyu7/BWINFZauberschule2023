@@ -11,7 +11,7 @@ namespace Zauberschule.Data
 
         public Stockwerk ErsteEtage { get; set; }
         public Stockwerk ZweiteEtage { get; set; }
-        public Person Person { get; set; }
+        //public Person Person { get; set; }
 
 
         public Schule(string path)

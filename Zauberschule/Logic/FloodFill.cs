@@ -9,26 +9,42 @@ namespace Zauberschule.Logic
         int floodNummer = 1;
 
 
-        public string[,] AuffüllenDesStockwerks(Schule schule, Ziel zielpunkt)
+        public Schule AuffüllenDerStockwerke(Schule schule, Ziel zielpunkt, Person person)
+        {
+            schule.ErsteEtage.Grundriss = AuffüllenDesStockwerks(schule.ErsteEtage, zielpunkt, person);
+
+            schule.ZweiteEtage.Grundriss = AuffüllenDesStockwerks(schule.ZweiteEtage, zielpunkt, person);
+
+            return schule;
+        }
+
+        private string[,] AuffüllenDesStockwerks(Stockwerk etage, Ziel zielpunkt, Person person)
         {
             Zwischenpunkte.Add(zielpunkt);
 
-            string[,] ersteEtage = schule.ErsteEtage.Grundriss;
+            string[,] aktuelleEtage = etage.Grundriss;
 
-            while (NotwendigkeitFürAuffüllungPrüfen(ersteEtage) == true)
+            aktuelleEtage[zielpunkt.PositionX, zielpunkt.PositionY] = "B";
+            aktuelleEtage[person.PositionX, person.PositionY] = "A";
+
+            while (NotwendigkeitFürAuffüllungPrüfen(aktuelleEtage) == true)
             {
-                if (PrüfenObAmZiel(ersteEtage) == true)
+                if (PrüfenObAmZiel(aktuelleEtage) == true)
                     break;
                 else
-                    FelderAuffüllen(ersteEtage);
+                    FelderAuffüllen(aktuelleEtage);
 
-                NeueKoordinatenHinzufügen(ersteEtage);
+                NeueKoordinatenHinzufügen(aktuelleEtage);
 
-                SinnloseKoordinatenLöschen(ersteEtage);
+                //SinnloseKoordinatenLöschen(ersteEtage);
 
                 floodNummer++;
             }
-            return ersteEtage;
+
+            Zwischenpunkte.RemoveRange(0, Zwischenpunkte.Count);
+            floodNummer = 1;
+
+            return aktuelleEtage;
         }
 
         private void NeueKoordinatenHinzufügen(string[,] etage)
@@ -108,7 +124,7 @@ namespace Zauberschule.Logic
                     return true;
                 else if (etage[z.PositionX, z.PositionY + 1] == "A")
                     return true;
-                else if (etage[z.PositionX, z.PositionY + 1] == "A")
+                else if (etage[z.PositionX, z.PositionY - 1] == "A")
                     return true;
             }
             return false;
