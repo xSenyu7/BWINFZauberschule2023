@@ -32,19 +32,19 @@ namespace Zauberschule.Logic
         {
 
         }
-        private void NachNorden()
+        private void NachVorne()
         {
 
         }
-        private void NachOsten()
+        private void NachRechts()
         {
 
         }
-        private void NachSüden()
+        private void NachUnten()
         {
 
         }
-        private void NachWesten()
+        private void NachLinks()
         {
 
         }
