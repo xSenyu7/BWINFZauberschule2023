@@ -30,7 +30,10 @@ namespace Zauberschule.Logic
             while (NotwendigkeitFürAuffüllungPrüfen(aktuelleEtage) == true)
             {
                 if (PrüfenObAmZiel(aktuelleEtage) == true)
+                {
+                    Console.WriteLine("Ziel wurde gefunden.");
                     break;
+                }
                 else
                     FelderAuffüllen(aktuelleEtage);
 
