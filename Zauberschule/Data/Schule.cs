@@ -27,6 +27,14 @@ namespace Zauberschule.Data
                 Länge = Convert.ToInt32(initialisiere.arrLänge),
                 Grundriss = initialisiere.OberesStockwerkAuslesen(grundrissInitErste, linien)
             };
+            foreach (var s in ErsteEtage.Grundriss)
+            {
+                if (s is "A")
+                    ErsteEtage.UrsprünglichePerson = true;
+                if (s is "B")
+                    ErsteEtage.UrsprünglichesZiel = true;
+            }
+                
 
             ZweiteEtage = new Stockwerk
             {
@@ -34,6 +42,13 @@ namespace Zauberschule.Data
                 Länge= Convert.ToInt32(initialisiere.arrLänge),
                 Grundriss = initialisiere.UnteresStockwerkAuslesen(grundrissInitZweite, linien)
             };
+            foreach (var s in ErsteEtage.Grundriss)
+            {
+                if (s is "A")
+                    ZweiteEtage.UrsprünglichePerson = true;
+                if (s is "B")
+                    ZweiteEtage.UrsprünglichesZiel = true;
+            }
         }
     }
 }
