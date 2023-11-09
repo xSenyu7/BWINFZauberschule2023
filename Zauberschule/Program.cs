@@ -1,4 +1,5 @@
-﻿using Zauberschule.Data;
+﻿using System.Security.Cryptography;
+using Zauberschule.Data;
 using Zauberschule.Logic;
 
 namespace Zauberschule
@@ -41,6 +42,60 @@ namespace Zauberschule
                 Console.WriteLine();
             }
 
+
+            if (ContainsValue(schule.ErsteEtage.Grundriss, "A"))
+            {
+                Console.WriteLine("Erste Etage enthält A");
+            }
+            else
+            {
+                Console.WriteLine("Erste Etage enthält kein A");
+            }
+
+            if (ContainsValue(schule.ErsteEtage.Grundriss, "B"))
+            {
+                Console.WriteLine("Erste Etage enthält B");
+            }
+            else
+            {
+                Console.WriteLine("Erste Etage enthält kein B");
+            }
+
+            if (ContainsValue(schule.ZweiteEtage.Grundriss, "A"))
+            {
+                Console.WriteLine("Zweite Etage enthält A");
+            }
+            else
+            {
+                Console.WriteLine("Zweite Etage enthält kein A");
+            }
+
+            if (ContainsValue(schule.ZweiteEtage.Grundriss, "B"))
+            {
+                Console.WriteLine("Zweite Etage enthält B");
+            }
+            else
+            {
+                Console.WriteLine("Zweite Etage enthält kein B");
+            }
+        }
+
+        static bool ContainsValue(string[,] array, string targetValue)
+        {
+            // Iteriere durch die Zeilen
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                // Iteriere durch die Spalten
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    // Überprüfe, ob das aktuelle Element den Zielwert enthält
+                    if (array[i, j] == targetValue)
+                    {
+                        return true; // Der Wert wurde gefunden
+                    }
+                }
+            }
+            return false;
         }
     }
 }

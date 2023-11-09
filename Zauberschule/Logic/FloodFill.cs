@@ -44,10 +44,21 @@ namespace Zauberschule.Logic
                 floodNummer++;
             }
 
+            ZielUndPersonPlatzhalterEntfernen(etage, zielpunkt, person, aktuelleEtage);
+
             Zwischenpunkte.RemoveRange(0, Zwischenpunkte.Count);
             floodNummer = 1;
 
             return aktuelleEtage;
+        }
+
+        private void ZielUndPersonPlatzhalterEntfernen(Stockwerk etage, Ziel zielpunkt, Person person, string[,] aktuelleEtage)
+        {
+            if (!etage.UrsprünglichesZiel)
+                aktuelleEtage[zielpunkt.PositionX, zielpunkt.PositionY] = "0";
+
+            if (!etage.UrsprünglichePerson)
+                aktuelleEtage[person.PositionX, person.PositionY] = Convert.ToString(floodNummer);
         }
 
         private void NeueKoordinatenHinzufügen(string[,] etage)
