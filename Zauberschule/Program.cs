@@ -21,7 +21,7 @@ namespace Zauberschule
 
             schule = floodFill.AuffüllenDerStockwerke(schule, ziel, person);
 
-            LaufAlgorhytmus lauf = new(schule.ErsteEtage.Grundriss, schule.ZweiteEtage.Grundriss, ziel, person);
+            LaufAlgorhytmus lauf = new(schule, ziel, person);
 
             lauf.SchnellstenWegFinden();
         }

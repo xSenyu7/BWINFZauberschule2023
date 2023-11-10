@@ -5,18 +5,13 @@ namespace Zauberschule.Logic
 {
     public class LaufAlgorhytmus
     {
-
-        List<Ziel> Zwischenpunkte = new List<Ziel>();
-
-        public string[,] ErsteEtage {  get; set; }
-        public string[,] ZweiteEtage{  get; set; }
+        public Schule Schulgebäude {  get; set; }
         public Ziel Ziel { get; set; }
         public Person Person { get; set; }
 
-        public LaufAlgorhytmus(string[,] ersteEtage, string[,] zweiteEtage, Ziel ziel, Person person)
+        public LaufAlgorhytmus(Schule schule, Ziel ziel, Person person)
         {
-            ErsteEtage = ersteEtage;
-            ZweiteEtage = zweiteEtage;
+            Schulgebäude = schule;
             Ziel = ziel;
             Person = person;
         }
@@ -24,7 +19,7 @@ namespace Zauberschule.Logic
 
         public void SchnellstenWegFinden()
         {
-            
+            while()
         }
         private void EtageHoch()
         {

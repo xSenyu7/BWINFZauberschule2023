@@ -44,6 +44,28 @@ namespace Zauberschule.Logic
             aktuelleLinie++;
         }
 
+        public bool UrsprünglichePersonAuslesen(string[,] etage)
+        {
+            foreach (var s in etage)
+            {
+                if (s is "A")
+                    return true;
+            }
+            return false;
+        }
+
+        public bool UrschprünglichesZielAuslesen(string[,] etage)
+        {
+            foreach (var s in etage)
+            {
+                if (s is "B")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public string[,] OberesStockwerkAuslesen(string[,] grundriss, string[] linien)
         {
             linie = linien[aktuelleLinie].ToCharArray();
