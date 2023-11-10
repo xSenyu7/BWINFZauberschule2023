@@ -24,12 +24,46 @@ namespace Zauberschule.Logic
 
         public void SchnellstenWegFinden()
         {
-            Ziel startpunkt = 
+            Ziel aktuellePosition = new(Person.PositionX, Person.PositionY);
 
-            while()
+            Etage aktuelleEtage = Etage.Keine;
+
+            aktuelleEtage = SucheNachAktuelleEtage(aktuelleEtage);
+
+            while (AbfragenObAmZiel(aktuellePosition))
+            {
+
+            }
         }
 
+        private bool AbfragenObAmZiel(Ziel aktuellePosition)
+        {
+            bool 
 
+            if(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] != "B")
+            {
+
+            }
+
+            return ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] != "B"
+                    || ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY] != "B"
+                            || ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1] != "B"
+                            || ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1] != "B";
+        }
+
+        private Etage SucheNachAktuelleEtage(Etage aktuelleEtage)
+        {
+            if (ErsteEtage.UrsprünglichePerson == true)
+            {
+                aktuelleEtage = Etage.Erste;
+            }
+            else if (ZweiteEtage.UrsprünglichePerson == true)
+            {
+                aktuelleEtage = Etage.Zweite;
+            }
+
+            return aktuelleEtage;
+        }
 
         private void EtageHoch()
         {

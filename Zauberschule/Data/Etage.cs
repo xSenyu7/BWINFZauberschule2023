@@ -9,6 +9,7 @@ namespace Zauberschule.Data
     public enum Etage
     {
         Erste,
-        Zweite
+        Zweite,
+        Keine
     }
 }

@@ -27,7 +27,7 @@ namespace Zauberschule.Logic
             aktuelleEtage[zielpunkt.PositionX, zielpunkt.PositionY] = "B";
             aktuelleEtage[person.PositionX, person.PositionY] = "A";
 
-            while (NotwendigkeitFürAuffüllungPrüfen(aktuelleEtage) == true)
+            while (NotwendigkeitFürAuffüllungPrüfen(aktuelleEtage))
             {
                 if (PrüfenObAmZiel(aktuelleEtage) == true)
                 {
