@@ -33,7 +33,14 @@ namespace Zauberschule.Logic
 
             while (AbfragenObAmZiel(aktuellePosition, aktuelleEtage))
             {
+                if (aktuelleEtage == Etage.Erste)
+                {
+                    if (ErsteEtage.Grundriss[aktuellePosition])
+                }
+                else if (aktuelleEtage == Etage.Zweite)
+                {
 
+                }
             }
         }
 
