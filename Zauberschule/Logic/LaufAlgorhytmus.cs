@@ -1,4 +1,5 @@
 ﻿
+using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using Zauberschule.Data;
@@ -12,6 +13,8 @@ namespace Zauberschule.Logic
         public Person Person { get; set; }
         public Stockwerk ErsteEtage { get; set; }
         public Stockwerk ZweiteEtage { get; set; }
+
+        public int Etagenwechsel { get; set; }
 
         public LaufAlgorhytmus(Schule schule, Ziel ziel, Person person)
         {
@@ -35,13 +38,104 @@ namespace Zauberschule.Logic
             {
                 if (aktuelleEtage == Etage.Erste)
                 {
-                    if (ErsteEtage.Grundriss[aktuellePosition])
+                    if (EntscheidenObNachVorne(aktuellePosition))
+                    {
+                        
+                    }
+                    else if (EntscheidenObNachHinten(aktuellePosition))
+                    {
+
+                    }
+                    else if (EntscheidenObNachRechts(aktuellePosition))
+                    {
+
+                    }
+                    else if (EntscheidenObNachLinks(aktuellePosition, aktuelleEtage))
+                    {
+
+                    }
                 }
                 else if (aktuelleEtage == Etage.Zweite)
                 {
+                    if (EntscheidenObNachVorne(aktuellePosition))
+                    {
 
+                    }
+                    else if (EntscheidenObNachHinten(aktuellePosition))
+                    {
+
+                    }
+                    else if (EntscheidenObNachRechts(aktuellePosition))
+                    {
+
+                    }
+                    else if (EntscheidenObNachLinks(aktuellePosition, aktuelleEtage))
+                    {
+
+                    }
                 }
             }
+        }
+
+        private bool PrüfungObEtagenwechsel(Ziel aktuellePosition, Etage aktuelleEtage)
+        {
+            if (aktuelleEtage == Etage.Erste)
+            {
+                if (ErsteEtage.UrsprünglichesZiel)
+                {
+                    if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]) < )
+                }
+            }
+            else if (aktuelleEtage == Etage.Zweite)
+            {
+
+            }
+            return false;
+        }
+
+        public bool EntscheidenObNachLinks(Ziel aktuellePosition, Etage aktuelleEtage)
+        {
+            if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]))
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY])
+                && PrüfungObEtagenwechsel(aktuellePosition, aktuelleEtage))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool EntscheidenObNachRechts(Ziel aktuellePosition)
+        {
+            if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool EntscheidenObNachHinten(Ziel aktuellePosition)
+        {
+            if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool EntscheidenObNachVorne(Ziel aktuellePosition)
+        {
+            if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY])
+                && Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]))
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool AbfragenObAmZiel(Ziel aktuellePosition, Etage etage)
@@ -112,7 +206,7 @@ namespace Zauberschule.Logic
         {
 
         }
-        private void NachUnten()
+        private void NachHinten()
         {
 
         }
