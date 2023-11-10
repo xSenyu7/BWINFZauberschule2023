@@ -1,4 +1,5 @@
 ﻿
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using Zauberschule.Data;
 
@@ -30,38 +31,61 @@ namespace Zauberschule.Logic
 
             aktuelleEtage = SucheNachAktuelleEtage(aktuelleEtage);
 
-            while (AbfragenObAmZiel(aktuellePosition))
+            while (AbfragenObAmZiel(aktuellePosition, aktuelleEtage))
             {
 
             }
         }
 
-        private bool AbfragenObAmZiel(Ziel aktuellePosition)
+        private bool AbfragenObAmZiel(Ziel aktuellePosition, Etage etage)
         {
-            bool 
+            bool zielFrage;
 
-            if(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] != "B")
+            if(etage == Etage.Erste)
             {
+                if (ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] == "B")
+                    return true;
 
+                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY] == "B")
+                    return true;
+
+                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1] == "B")
+                    return true;
+
+                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1] == "B")
+                    return true;
+                
+                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] == "B")
+                    return true;
             }
+            else if (etage == Etage.Zweite)
+            {
+                if (ZweiteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] == "B")
+                    return true;
 
-            return ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] != "B"
-                    || ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY] != "B"
-                            || ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1] != "B"
-                            || ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1] != "B";
+                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY] == "B")
+                    return true;
+                
+                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1] == "B")
+                    return true;
+                
+                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1] == "B")
+                    return true;
+                
+                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] == "B")
+                    return true;
+            }
+            return false;
         }
 
         private Etage SucheNachAktuelleEtage(Etage aktuelleEtage)
         {
             if (ErsteEtage.UrsprünglichePerson == true)
-            {
                 aktuelleEtage = Etage.Erste;
-            }
+            
             else if (ZweiteEtage.UrsprünglichePerson == true)
-            {
                 aktuelleEtage = Etage.Zweite;
-            }
-
+            
             return aktuelleEtage;
         }
 
