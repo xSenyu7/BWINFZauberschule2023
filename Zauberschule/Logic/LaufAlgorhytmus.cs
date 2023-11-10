@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Cryptography.X509Certificates;
 using Zauberschule.Data;
 
 namespace Zauberschule.Logic
@@ -23,8 +24,13 @@ namespace Zauberschule.Logic
 
         public void SchnellstenWegFinden()
         {
+            Ziel startpunkt = 
+
             while()
         }
+
+
+
         private void EtageHoch()
         {
 
