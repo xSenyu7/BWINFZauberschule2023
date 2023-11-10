@@ -8,12 +8,16 @@ namespace Zauberschule.Logic
         public Schule Schulgebäude {  get; set; }
         public Ziel Ziel { get; set; }
         public Person Person { get; set; }
+        public Stockwerk ErsteEtage { get; set; }
+        public Stockwerk ZweiteEtage { get; set; }
 
         public LaufAlgorhytmus(Schule schule, Ziel ziel, Person person)
         {
             Schulgebäude = schule;
             Ziel = ziel;
             Person = person;
+            ErsteEtage = schule.ErsteEtage;
+            ZweiteEtage = schule.ZweiteEtage;
         }
 
 
