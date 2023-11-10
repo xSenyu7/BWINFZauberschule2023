@@ -23,7 +23,42 @@ namespace Zauberschule
 
             LaufAlgorhytmus lauf = new(schule, ziel, person);
 
-            lauf.SchnellstenWegFinden();
+            schule = lauf.SchnellstenWegFinden();
+
+            for (int i = 0; i < schule.ErsteEtage.Länge; i++)
+            {
+                for (int j = 0; j < schule.ErsteEtage.Breite; j++)
+                {
+                    if (bla(schule.ErsteEtage.Grundriss[i, j]))
+                        schule.ErsteEtage.Grundriss[i, j] = ".";
+
+                    Console.Write(schule.ErsteEtage.Grundriss[i,j]);
+                }
+                Console.WriteLine();
+            }
+            for (int i = 0; i < schule.ZweiteEtage.Länge; i++)
+            {
+                for (int j = 0; j < schule.ZweiteEtage.Breite; j++)
+                {
+                    if (bla(schule.ZweiteEtage.Grundriss[i, j]))
+                        schule.ZweiteEtage.Grundriss[i, j] = ".";
+
+                    Console.Write(schule.ZweiteEtage.Grundriss[i, j]);
+                }
+                Console.WriteLine();
+            }
+
+
+        }
+        static bool bla(string s)
+        {
+            try
+            {
+                Convert.ToInt32(s);
+                return true;
+            }
+            catch { }
+            return false;
         }
     }
 }

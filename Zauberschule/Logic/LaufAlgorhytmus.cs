@@ -27,7 +27,7 @@ namespace Zauberschule.Logic
         private Ziel _aktuellePosition;
         private Etage _aktuelleEtage = Etage.Keine;
 
-        public void SchnellstenWegFinden()
+        public Schule SchnellstenWegFinden()
         {
             _aktuelleEtage = SucheNachAktuelleEtage();
 
@@ -37,7 +37,7 @@ namespace Zauberschule.Logic
             int linkeZahl;
             int andereEtageZahl;
 
-            while (AbfragenObAmZiel())
+            while (!AbfragenObAmZiel())
             {
                 vordereZahl = SucheVordereZahl();
                 hintereZahl = SucheHintereZahl();
@@ -92,6 +92,9 @@ namespace Zauberschule.Logic
                     }
                 }
             }
+            Schulgebäude.ErsteEtage = _ersteEtage;
+            Schulgebäude.ZweiteEtage = _zweiteEtage;
+            return Schulgebäude;
         }
 
         public int SucheAndereEtageZahl()
@@ -102,14 +105,16 @@ namespace Zauberschule.Logic
                 {
                     try
                     {
-                        return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
+                        int koordinatenZahl = Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY]);
+                        return koordinatenZahl + 7;
                     } catch { }
                 }
                 else if (!_ersteEtage.UrsprünglichesZiel)
                 {
                     try
                     {
-                        return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
+                        int koordinatenZahl = Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY]);
+                        return koordinatenZahl + 3;
                     } catch { }
                 }
 
@@ -120,14 +125,16 @@ namespace Zauberschule.Logic
                 {
                     try
                     {
-                        return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
+                        int koordinatenZahl = Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY]);
+                        return koordinatenZahl + 7;
                     } catch { }
                 }
                 else if (!_zweiteEtage.UrsprünglichesZiel)
                 {
                     try
                     {
-                        return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
+                        int koordinatenZahl = Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY]);
+                        return koordinatenZahl + 3;
                     } catch { }
                 }
             }
@@ -338,12 +345,12 @@ namespace Zauberschule.Logic
         {
             if(_aktuelleEtage == Etage.Erste)
             {
-                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "ʌ";
+                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
                 _aktuellePosition.PositionX++; 
             }
             else if(_aktuelleEtage == Etage.Zweite)
             {
-                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "ʌ";
+                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
                 _aktuellePosition.PositionX++;
             }
         }
@@ -364,12 +371,12 @@ namespace Zauberschule.Logic
         {
             if (_aktuelleEtage == Etage.Erste)
             {
-                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "^";
                 _aktuellePosition.PositionX--;
             }
             else if (_aktuelleEtage == Etage.Zweite)
             {
-                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "^";
                 _aktuellePosition.PositionX--;
             }
         }
