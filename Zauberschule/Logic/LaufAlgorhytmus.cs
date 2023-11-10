@@ -11,28 +11,25 @@ namespace Zauberschule.Logic
         public Schule Schulgebäude {  get; set; }
         public Ziel Ziel { get; set; }
         public Person Person { get; set; }
-        public Stockwerk ErsteEtage { get; set; }
-        public Stockwerk ZweiteEtage { get; set; }
-        public int Etagenwechsel { get; set; }
 
         public LaufAlgorhytmus(Schule schule, Ziel ziel, Person person)
         {
             Schulgebäude = schule;
             Ziel = ziel;
             Person = person;
-            ErsteEtage = schule.ErsteEtage;
-            ZweiteEtage = schule.ZweiteEtage;
+            _ersteEtage = schule.ErsteEtage;
+            _zweiteEtage = schule.ZweiteEtage;
+            _aktuellePosition = new(Person.PositionX, Person.PositionY);
         }
 
+        private Stockwerk _ersteEtage;
+        private Stockwerk _zweiteEtage;
+        private Ziel _aktuellePosition;
+        private Etage _aktuelleEtage = Etage.Keine;
 
         public void SchnellstenWegFinden()
         {
-            
-            Ziel aktuellePosition = new(Person.PositionX, Person.PositionY);
-
-            Etage aktuelleEtage = Etage.Keine;
-
-            aktuelleEtage = SucheNachAktuelleEtage(aktuelleEtage);
+            _aktuelleEtage = SucheNachAktuelleEtage();
 
             int vordereZahl;
             int hintereZahl;
@@ -40,15 +37,38 @@ namespace Zauberschule.Logic
             int linkeZahl;
             int andereEtageZahl;
 
-            while (AbfragenObAmZiel(aktuellePosition, aktuelleEtage))
+            while (AbfragenObAmZiel())
             {
-                vordereZahl = SucheVordereZahl(aktuellePosition, aktuelleEtage);
-                hintereZahl = SucheHintereZahl(aktuellePosition, aktuelleEtage);
-                rechteZahl = SucheRechteZahl(aktuellePosition, aktuelleEtage);
-                linkeZahl = SucheLinkeZahl(aktuellePosition, aktuelleEtage);
-                andereEtageZahl = SucheAndereEtageZahl(aktuellePosition, aktuelleEtage);
+                vordereZahl = SucheVordereZahl();
+                hintereZahl = SucheHintereZahl();
+                rechteZahl = SucheRechteZahl();
+                linkeZahl = SucheLinkeZahl();
+                andereEtageZahl = SucheAndereEtageZahl();
 
-                if (aktuelleEtage == Etage.Erste)
+                if (_aktuelleEtage == Etage.Erste)
+                {
+                    if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    {
+                        NachVorne();
+                    }
+                    else if (EntscheidenObNachHinten(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    {
+                        NachHinten();
+                    }
+                    else if (EntscheidenObNachRechts(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    {
+                        NachRechts();
+                    }
+                    else if (EntscheidenObNachLinks(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    {
+                        NachLinks();
+                    }
+                    else if (EntscheidenObAndereEtage(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    {
+                        EtageHoch();
+                    }
+                }
+                else if (_aktuelleEtage == Etage.Zweite)
                 {
                     if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
                     {
@@ -71,143 +91,120 @@ namespace Zauberschule.Logic
                         EtageRunter();
                     }
                 }
-                else if (aktuelleEtage == Etage.Zweite)
-                {
-                    if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachVorne();
-                    }
-                    else if (EntscheidenObNachHinten(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachHinten();
-                    }
-                    else if (EntscheidenObNachRechts(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachRechts();
-                    }
-                    else if (EntscheidenObNachLinks(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachLinks();
-                    }
-                    else if (EntscheidenObAndereEtage(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        EtageRunter();
-                    }
-                }
             }
         }
 
-        public int SucheAndereEtageZahl(Ziel aktuellePosition, Etage aktuelleEtage)
+        public int SucheAndereEtageZahl()
         {
-            if (aktuelleEtage == Etage.Erste)
+            if (_aktuelleEtage == Etage.Erste)
             {
-                if (ErsteEtage.UrsprünglichesZiel)
+                if (_ersteEtage.UrsprünglichesZiel)
                 {
                     try
                     {
-                        return Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] + 7);
+                        return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
                     } catch { }
                 }
-                else if (!ErsteEtage.UrsprünglichesZiel)
+                else if (!_ersteEtage.UrsprünglichesZiel)
                 {
                     try
                     {
-                        return Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] + 7);
+                        return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
                     } catch { }
                 }
 
             }
-            else if (aktuelleEtage == Etage.Zweite)
+            else if (_aktuelleEtage == Etage.Zweite)
             {
-                if (ZweiteEtage.UrsprünglichesZiel)
+                if (_zweiteEtage.UrsprünglichesZiel)
                 {
                     try
                     {
-                        return Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] + 7);
+                        return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
                     } catch { }
                 }
-                else if (!ZweiteEtage.UrsprünglichesZiel)
+                else if (!_zweiteEtage.UrsprünglichesZiel)
                 {
                     try
                     {
-                        return Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] + 7);
+                        return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] + 7);
                     } catch { }
                 }
             }
             return 2147483647;
         }
 
-        public int SucheLinkeZahl(Ziel aktuellePosition, Etage aktuelleEtage)
+        public int SucheLinkeZahl()
         {
-            if (aktuelleEtage == Etage.Erste)
+            if (_aktuelleEtage == Etage.Erste)
             {
                 try
                 {
-                    return Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1]);
+                    return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY - 1]);
                 } catch { }
             }
-            else if (aktuelleEtage == Etage.Zweite)
+            else if (_aktuelleEtage == Etage.Zweite)
             {
                 try
                 {
-                    return Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1]);
+                    return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY - 1]);
                 } catch { }
             }
             return 2147483647;
         }
 
-        public int SucheRechteZahl(Ziel aktuellePosition, Etage aktuelleEtage)
+        public int SucheRechteZahl()
         {
-            if (aktuelleEtage == Etage.Erste)
+            if (_aktuelleEtage == Etage.Erste)
             {
                 try
                 {
-                    return Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1]);
+                    return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY + 1]);
                 } catch { }
             }
-            else if (aktuelleEtage == Etage.Zweite)
+            else if (_aktuelleEtage == Etage.Zweite)
             {
                 try
                 {
-                    return Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1]);
+                    return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY + 1]);
                 } catch { }
             }
             return 2147483647;
         }
 
-        public int SucheHintereZahl(Ziel aktuellePosition, Etage aktuelleEtage)
+        public int SucheHintereZahl()
         {
-            if (aktuelleEtage == Etage.Erste)
+            if (_aktuelleEtage == Etage.Erste)
             {
                 try
                 {
-                    return Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]);
+                    return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX - 1, _aktuellePosition.PositionY]);
                 } catch { }
             }
-            else if (aktuelleEtage == Etage.Zweite)
+            else if (_aktuelleEtage == Etage.Zweite)
             {
                 try
                 {
-                    return Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY]);
+                    return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX - 1, _aktuellePosition.PositionY]);
                 } catch { }
             }
             return 2147483647;
         }
 
-        public int SucheVordereZahl(Ziel aktuellePosition, Etage aktuelleEtage)
+        public int SucheVordereZahl()
         {
-            if (aktuelleEtage == Etage.Erste)
+            if (_aktuelleEtage == Etage.Erste)
             {
                 try
                 {
-                    return Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY]);    
+                    return Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX + 1, _aktuellePosition.PositionY]);    
                 } catch { }
             }
-            else if (aktuelleEtage == Etage.Zweite)
+            else if (_aktuelleEtage == Etage.Zweite)
             {
                 try
                 {
-                    return Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY]);
+                    return Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX + 1, _aktuellePosition.PositionY]);
                 } catch { }
             }
             return 2147483647;
@@ -221,45 +218,6 @@ namespace Zauberschule.Logic
                 && andereEtageZahl < rechteZahl)
             {
                 return true;
-            }
-            return false;
-        }
-
-        private bool PrüfungObEtagenwechsel(Ziel aktuellePosition, Etage aktuelleEtage)
-        {
-            if (aktuelleEtage == Etage.Erste)
-            {
-                if (ErsteEtage.UrsprünglichesZiel)
-                {
-                    if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) < Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) + 7)
-                    {
-                        return true;
-                    }
-                }
-                else if (!ErsteEtage.UrsprünglichesZiel)
-                {
-                    if (Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) < Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) + 3)
-                    {
-                        return true;
-                    }
-                }
-            }
-            else if (aktuelleEtage == Etage.Zweite)
-            {
-                if (ZweiteEtage.UrsprünglichesZiel)
-                {
-                    if (Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) + 7)
-                    {
-                        return true;
-                    }
-                }
-                else if (!ZweiteEtage.UrsprünglichesZiel)
-                {
-                    if (Convert.ToInt32(ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) < Convert.ToInt32(ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY]) + 3)
-                    {
-                        return true;
-                    }
-                }
             }
             return false;
         }
@@ -312,81 +270,121 @@ namespace Zauberschule.Logic
             return false;
         }
 
-        private bool AbfragenObAmZiel(Ziel aktuellePosition, Etage etage)
+        private bool AbfragenObAmZiel()
         {
             bool zielFrage;
 
-            if(etage == Etage.Erste)
+            if(_aktuelleEtage == Etage.Erste)
             {
-                if (ErsteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] == "B")
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX + 1, _aktuellePosition.PositionY] == "B")
                     return true;
 
-                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY] == "B")
+                else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX - 1, _aktuellePosition.PositionY] == "B")
                     return true;
 
-                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1] == "B")
+                else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY + 1] == "B")
                     return true;
 
-                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1] == "B")
+                else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY - 1] == "B")
                     return true;
                 
-                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] == "B")
+                else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] == "B")
                     return true;
             }
-            else if (etage == Etage.Zweite)
+            else if (_aktuelleEtage == Etage.Zweite)
             {
-                if (ZweiteEtage.Grundriss[aktuellePosition.PositionX + 1, aktuellePosition.PositionY] == "B")
+                if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX + 1, _aktuellePosition.PositionY] == "B")
                     return true;
 
-                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX - 1, aktuellePosition.PositionY] == "B")
+                else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX - 1, _aktuellePosition.PositionY] == "B")
                     return true;
                 
-                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY + 1] == "B")
+                else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY + 1] == "B")
                     return true;
                 
-                else if (ZweiteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY - 1] == "B")
+                else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY - 1] == "B")
                     return true;
                 
-                else if (ErsteEtage.Grundriss[aktuellePosition.PositionX, aktuellePosition.PositionY] == "B")
+                else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] == "B")
                     return true;
             }
             return false;
         }
 
-        private Etage SucheNachAktuelleEtage(Etage aktuelleEtage)
+        private Etage SucheNachAktuelleEtage()
         {
-            if (ErsteEtage.UrsprünglichePerson == true)
-                aktuelleEtage = Etage.Erste;
+            if (_ersteEtage.UrsprünglichePerson == true)
+                _aktuelleEtage = Etage.Erste;
             
-            else if (ZweiteEtage.UrsprünglichePerson == true)
-                aktuelleEtage = Etage.Zweite;
+            else if (_zweiteEtage.UrsprünglichePerson == true)
+                _aktuelleEtage = Etage.Zweite;
             
-            return aktuelleEtage;
+            return _aktuelleEtage;
         }
 
         private void EtageHoch()
         {
-
+            _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
+            _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
+            _aktuelleEtage = Etage.Zweite;
         }
         private void EtageRunter()
         {
-
+            _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
+            _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
+            _aktuelleEtage = Etage.Erste;
         }
         private void NachVorne()
         {
-
+            if(_aktuelleEtage == Etage.Erste)
+            {
+                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "ʌ";
+                _aktuellePosition.PositionX++; 
+            }
+            else if(_aktuelleEtage == Etage.Zweite)
+            {
+                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "ʌ";
+                _aktuellePosition.PositionX++;
+            }
         }
         private void NachRechts()
         {
-
+            if (_aktuelleEtage == Etage.Erste)
+            {
+                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = ">";
+                _aktuellePosition.PositionY++;
+            }
+            else if (_aktuelleEtage == Etage.Zweite)
+            {
+                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = ">";
+                _aktuellePosition.PositionY++;
+            }
         }
         private void NachHinten()
         {
-
+            if (_aktuelleEtage == Etage.Erste)
+            {
+                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+                _aktuellePosition.PositionX--;
+            }
+            else if (_aktuelleEtage == Etage.Zweite)
+            {
+                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+                _aktuellePosition.PositionX--;
+            }
         }
         private void NachLinks()
         {
-
+            if (_aktuelleEtage == Etage.Erste)
+            {
+                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "<";
+                _aktuellePosition.PositionY--;
+            }
+            else if (_aktuelleEtage == Etage.Zweite)
+            {
+                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "<";
+                _aktuellePosition.PositionY--;
+            }
         }
     }
 }
