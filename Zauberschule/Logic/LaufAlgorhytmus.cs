@@ -37,7 +37,7 @@ namespace Zauberschule.Logic
             int linkeZahl;
             int andereEtageZahl;
 
-            while (!AbfragenObAmZiel())
+            while(!AbfragenObAmZiel())
             {
                 vordereZahl = SucheVordereZahl();
                 hintereZahl = SucheHintereZahl();
@@ -345,12 +345,16 @@ namespace Zauberschule.Logic
         {
             if(_aktuelleEtage == Etage.Erste)
             {
-                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+                if(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+
                 _aktuellePosition.PositionX++; 
             }
             else if(_aktuelleEtage == Etage.Zweite)
             {
-                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "v";
+
                 _aktuellePosition.PositionX++;
             }
         }
@@ -358,12 +362,16 @@ namespace Zauberschule.Logic
         {
             if (_aktuelleEtage == Etage.Erste)
             {
-                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = ">";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = ">";
+
                 _aktuellePosition.PositionY++;
             }
             else if (_aktuelleEtage == Etage.Zweite)
             {
-                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = ">";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = ">";
+
                 _aktuellePosition.PositionY++;
             }
         }
@@ -371,12 +379,16 @@ namespace Zauberschule.Logic
         {
             if (_aktuelleEtage == Etage.Erste)
             {
-                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "^";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "^";
+
                 _aktuellePosition.PositionX--;
             }
             else if (_aktuelleEtage == Etage.Zweite)
             {
-                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "^";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "^";
+
                 _aktuellePosition.PositionX--;
             }
         }
@@ -384,12 +396,16 @@ namespace Zauberschule.Logic
         {
             if (_aktuelleEtage == Etage.Erste)
             {
-                _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "<";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "<";
+
                 _aktuellePosition.PositionY--;
             }
             else if (_aktuelleEtage == Etage.Zweite)
             {
-                _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "<";
+                if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] != "!")
+                    _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "<";
+
                 _aktuellePosition.PositionY--;
             }
         }
