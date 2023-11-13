@@ -21,44 +21,17 @@ namespace Zauberschule
 
             schule = floodFill.AuffüllenDerStockwerke(schule, ziel, person);
 
+            schule.WriteSchuleMitZahl(schule);
+
             LaufAlgorhytmus lauf = new(schule, ziel, person);
 
             schule = lauf.SchnellstenWegFinden();
 
-            for (int i = 0; i < schule.ErsteEtage.Länge; i++)
-            {
-                for (int j = 0; j < schule.ErsteEtage.Breite; j++)
-                {
-                    if (bla(schule.ErsteEtage.Grundriss[i, j]))
-                        schule.ErsteEtage.Grundriss[i, j] = ".";
+            Console.WriteLine("\n");
 
-                    Console.Write(schule.ErsteEtage.Grundriss[i,j]);
-                }
-                Console.WriteLine();
-            }
-            for (int i = 0; i < schule.ZweiteEtage.Länge; i++)
-            {
-                for (int j = 0; j < schule.ZweiteEtage.Breite; j++)
-                {
-                    if (bla(schule.ZweiteEtage.Grundriss[i, j]))
-                        schule.ZweiteEtage.Grundriss[i, j] = ".";
+            schule.WriteSchule(schule);
 
-                    Console.Write(schule.ZweiteEtage.Grundriss[i, j]);
-                }
-                Console.WriteLine();
-            }
-
-
-        }
-        static bool bla(string s)
-        {
-            try
-            {
-                Convert.ToInt32(s);
-                return true;
-            }
-            catch { }
-            return false;
+            
         }
     }
 }

@@ -106,7 +106,7 @@ namespace Zauberschule.Logic
                     try
                     {
                         int koordinatenZahl = Convert.ToInt32(_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY]);
-                        return koordinatenZahl + 7;
+                        return koordinatenZahl + 6;
                     } catch { }
                 }
                 else if (!_ersteEtage.UrsprünglichesZiel)
@@ -126,7 +126,7 @@ namespace Zauberschule.Logic
                     try
                     {
                         int koordinatenZahl = Convert.ToInt32(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY]);
-                        return koordinatenZahl + 7;
+                        return koordinatenZahl + 6;
                     } catch { }
                 }
                 else if (!_zweiteEtage.UrsprünglichesZiel)
