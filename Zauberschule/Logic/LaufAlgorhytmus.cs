@@ -97,7 +97,7 @@ namespace Zauberschule.Logic
             return Schulgebäude;
         }
 
-        public int SucheAndereEtageZahl()
+        private int SucheAndereEtageZahl()
         {
             if (_aktuelleEtage == Etage.Erste)
             {
@@ -141,7 +141,7 @@ namespace Zauberschule.Logic
             return 2147483647;
         }
 
-        public int SucheLinkeZahl()
+        private int SucheLinkeZahl()
         {
             if (_aktuelleEtage == Etage.Erste)
             {
@@ -160,7 +160,7 @@ namespace Zauberschule.Logic
             return 2147483647;
         }
 
-        public int SucheRechteZahl()
+        private int SucheRechteZahl()
         {
             if (_aktuelleEtage == Etage.Erste)
             {
@@ -179,7 +179,7 @@ namespace Zauberschule.Logic
             return 2147483647;
         }
 
-        public int SucheHintereZahl()
+        private int SucheHintereZahl()
         {
             if (_aktuelleEtage == Etage.Erste)
             {
@@ -198,7 +198,7 @@ namespace Zauberschule.Logic
             return 2147483647;
         }
 
-        public int SucheVordereZahl()
+        private int SucheVordereZahl()
         {
             if (_aktuelleEtage == Etage.Erste)
             {
@@ -217,7 +217,7 @@ namespace Zauberschule.Logic
             return 2147483647;
         }
 
-        public bool EntscheidenObAndereEtage(int vordereZahl, int hintereZahl, int rechteZahl, int linkeZahl, int andereEtageZahl)
+        private bool EntscheidenObAndereEtage(int vordereZahl, int hintereZahl, int rechteZahl, int linkeZahl, int andereEtageZahl)
         {
             if (andereEtageZahl < vordereZahl
                 && andereEtageZahl < hintereZahl
@@ -229,7 +229,7 @@ namespace Zauberschule.Logic
             return false;
         }
 
-        public bool EntscheidenObNachLinks(int vordereZahl, int hintereZahl, int rechteZahl, int linkeZahl, int andereEtageZahl)
+        private bool EntscheidenObNachLinks(int vordereZahl, int hintereZahl, int rechteZahl, int linkeZahl, int andereEtageZahl)
         {
             if (linkeZahl < rechteZahl
                 && linkeZahl < hintereZahl
