@@ -92,6 +92,17 @@ namespace Zauberschule.Logic
                     }
                 }
             }
+            if (AbfragenObAmZiel())
+            {
+                if (_aktuelleEtage == Etage.Erste && _zweiteEtage.UrsprünglichesZiel)
+                {
+                    _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
+                }
+                else if (_aktuelleEtage == Etage.Zweite && _ersteEtage.UrsprünglichesZiel)
+                {
+                    _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
+                }
+            }
             Schulgebäude.ErsteEtage = _ersteEtage;
             Schulgebäude.ZweiteEtage = _zweiteEtage;
             return Schulgebäude;
