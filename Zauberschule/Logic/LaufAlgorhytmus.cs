@@ -31,81 +31,133 @@ namespace Zauberschule.Logic
         {
             _aktuelleEtage = SucheNachAktuelleEtage();
 
-            int vordereZahl;
-            int hintereZahl;
-            int rechteZahl;
-            int linkeZahl;
-            int andereEtageZahl;
+            int vordereZahl = SucheVordereZahl();
+            int hintereZahl = SucheHintereZahl();
+            int rechteZahl = SucheRechteZahl();
+            int linkeZahl = SucheLinkeZahl();
+            int andereEtageZahl = SucheAndereEtageZahl();
 
-            while(!AbfragenObAmZiel())
+            while (!AbfragenObAmZiel())
             {
+                
+
+                if (_aktuelleEtage == Etage.Erste)
+                {
+                    NächsterSchrittErste(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl);
+                }
+                else if (_aktuelleEtage == Etage.Zweite)
+                {
+                    NäcshterSchrittZweite(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl);
+                }
                 vordereZahl = SucheVordereZahl();
                 hintereZahl = SucheHintereZahl();
                 rechteZahl = SucheRechteZahl();
                 linkeZahl = SucheLinkeZahl();
                 andereEtageZahl = SucheAndereEtageZahl();
-
+            }
+            if (AbfragenObAmZiel())
+            {
                 if (_aktuelleEtage == Etage.Erste)
                 {
-                    if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    if (_zweiteEtage.UrsprünglichesZiel)
                     {
-                        NachVorne();
+                        _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
                     }
-                    else if (EntscheidenObNachHinten(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachHinten();
-                    }
-                    else if (EntscheidenObNachRechts(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachRechts();
-                    }
-                    else if (EntscheidenObNachLinks(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY - 1] == "B")
                     {
                         NachLinks();
                     }
-                    else if (EntscheidenObAndereEtage(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    else if(_ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY + 1] == "B")
                     {
-                        EtageHoch();
+                        NachRechts();
+                    }
+                    else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX - 1, _aktuellePosition.PositionY] == "B")
+                    {
+                        NachHinten();
+                    }
+                    else if (_ersteEtage.Grundriss[_aktuellePosition.PositionX + 1, _aktuellePosition.PositionY] == "B")
+                    {
+                        NachVorne();
                     }
                 }
                 else if (_aktuelleEtage == Etage.Zweite)
                 {
-                    if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    if (_ersteEtage.UrsprünglichesZiel)
                     {
-                        NachVorne();
+                        _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
                     }
-                    else if (EntscheidenObNachHinten(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachHinten();
-                    }
-                    else if (EntscheidenObNachRechts(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
-                    {
-                        NachRechts();
-                    }
-                    else if (EntscheidenObNachLinks(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY - 1] == "B")
                     {
                         NachLinks();
                     }
-                    else if (EntscheidenObAndereEtage(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+                    else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY + 1] == "B")
                     {
-                        EtageRunter();
+                        NachRechts();
+                    }
+                    else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX - 1, _aktuellePosition.PositionY] == "B")
+                    {
+                        NachHinten();
+                    }
+                    else if (_zweiteEtage.Grundriss[_aktuellePosition.PositionX + 1, _aktuellePosition.PositionY] == "B")
+                    {
+                        NachVorne();
                     }
                 }
-            }
-            if (AbfragenObAmZiel())
-            {
-                if (_aktuelleEtage == Etage.Erste && _zweiteEtage.UrsprünglichesZiel)
-                {
-                    _ersteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
-                }
-                else if (_aktuelleEtage == Etage.Zweite && _ersteEtage.UrsprünglichesZiel)
-                {
-                    _zweiteEtage.Grundriss[_aktuellePosition.PositionX, _aktuellePosition.PositionY] = "!";
-                }
+                
+                
+                
             }
             Schulgebäude.ErsteEtage = _ersteEtage;
             Schulgebäude.ZweiteEtage = _zweiteEtage;
             return Schulgebäude;
+        }
+
+        private void NäcshterSchrittZweite(int vordereZahl, int hintereZahl, int rechteZahl, int linkeZahl, int andereEtageZahl)
+        {
+            if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachVorne();
+            }
+            else if (EntscheidenObNachHinten(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachHinten();
+            }
+            else if (EntscheidenObNachRechts(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachRechts();
+            }
+            else if (EntscheidenObNachLinks(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachLinks();
+            }
+            else if (EntscheidenObAndereEtage(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                EtageRunter();
+            }
+        }
+
+        private void NächsterSchrittErste(int vordereZahl, int hintereZahl, int rechteZahl, int linkeZahl, int andereEtageZahl)
+        {
+            if (EntscheidenObNachVorne(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachVorne();
+            }
+            else if (EntscheidenObNachHinten(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachHinten();
+            }
+            else if (EntscheidenObNachRechts(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachRechts();
+            }
+            else if (EntscheidenObNachLinks(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                NachLinks();
+            }
+            else if (EntscheidenObAndereEtage(vordereZahl, hintereZahl, rechteZahl, linkeZahl, andereEtageZahl))
+            {
+                EtageHoch();
+            }
         }
 
         private int SucheAndereEtageZahl()
