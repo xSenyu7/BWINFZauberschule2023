@@ -11,9 +11,16 @@ namespace Zauberschule.Logic
 
         public Schule AuffüllenDerStockwerke(Schule schule, Ziel zielpunkt, Person person)
         {
-            schule.ErsteEtage.Grundriss = AuffüllenDesStockwerks(schule.ErsteEtage, zielpunkt, person);
+            Zwischenpunkte.Add(zielpunkt);
 
-            schule.ZweiteEtage.Grundriss = AuffüllenDesStockwerks(schule.ZweiteEtage, zielpunkt, person);
+            string[,] ersteEtage = schule.ErsteEtage.Grundriss;
+            string[,] zweiteEtage = schule.ZweiteEtage.Grundriss;
+
+
+
+            //schule.ErsteEtage.Grundriss = AuffüllenDesStockwerks(schule.ErsteEtage, zielpunkt, person);
+
+            //schule.ZweiteEtage.Grundriss = AuffüllenDesStockwerks(schule.ZweiteEtage, zielpunkt, person);
 
             return schule;
         }
